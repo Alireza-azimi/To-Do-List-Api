@@ -60,7 +60,9 @@ app.get("/tasks", async (req, res) => {
 
 app.post("/tasks", async (req, res) => {
   const { title } = req.body;
-  if (!title) return res.status(400).send("Title is required");
+  if (!title) {
+    return res.status(400).send("Title is required");
+  }
   try {
     const result = await pool.query(
       "INSERT INTO tasks (title, completed) VALUES ($1, $2) RETURNING *",
@@ -84,7 +86,9 @@ app.put("/tasks/:id", async (req, res) => {
       "UPDATE tasks SET completed = $1 WHERE id = $2 RETURNING *",
       [completed, id]
     );
-    if (result.rowCount === 0) return res.status(404).send("Task not found");
+    if (result.rowCount === 0) {
+      return res.status(404).send("Task not found");
+    }
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err.stack);
@@ -96,7 +100,9 @@ app.delete("/tasks/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const result = await pool.query("DELETE FROM tasks WHERE id = $1", [id]);
-    if (result.rowCount === 0) return res.status(404).send("Task not found");
+    if (result.rowCount === 0) {
+      return res.status(404).send("Task not found");
+    }
     res.send("Task deleted");
   } catch (err) {
     console.error(err.stack);

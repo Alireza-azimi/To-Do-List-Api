@@ -36,7 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   taskForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const title = taskInput.value.trim();
-    if (!title) return;
+    if (!title) {
+      return;
+    }
     try {
       await fetch("/tasks", {
         method: "POST",
