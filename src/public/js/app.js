@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
 
-  // Fetch and display tasks
   const fetchTasks = async () => {
     try {
       const response = await fetch("/tasks");
@@ -34,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Add new task
   taskForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const title = taskInput.value.trim();
@@ -52,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Toggle task completion
   taskList.addEventListener("click", async (e) => {
     if (e.target.classList.contains("toggle-btn")) {
       const id = e.target.dataset.id;
@@ -70,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Delete task
   taskList.addEventListener("click", async (e) => {
     if (e.target.classList.contains("delete-btn")) {
       const id = e.target.dataset.id;
@@ -85,6 +81,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initial fetch
   fetchTasks();
 });
